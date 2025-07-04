@@ -95,7 +95,7 @@
             border-radius: 3px;
         }
 
-        /* Enhanced Navigation - SuperHub Style */
+        /* Enhanced Navigation - Simplified */
         .navbar {
             position: fixed;
             top: 0;
@@ -849,19 +849,22 @@
             font-size: 1rem;
         }
 
-        /* TESTIMONIALS */
+        /* TESTIMONIALS - CLEAN LAYOUT */
         .testimonial-card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
-            padding: 3rem;
+            padding: 2.5rem;
             backdrop-filter: blur(20px);
             transition: all 0.3s ease;
             height: 100%;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* SUBTLE MOVING PARTICLE ANIMATION - LAYER 1 */
         .testimonial-card::before {
             content: '';
             position: absolute;
@@ -870,18 +873,19 @@
             width: 100%;
             height: 100%;
             background:
-                radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(2px 2px at 40% 70%, rgba(136, 76, 229, 0.8), transparent),
-                radial-gradient(1px 1px at 90% 40%, rgba(255, 82, 203, 0.8), transparent),
-                radial-gradient(1px 1px at 60% 10%, rgba(163, 228, 255, 0.8), transparent),
-                radial-gradient(2px 2px at 10% 80%, rgba(255, 255, 255, 0.6), transparent),
-                radial-gradient(1px 1px at 80% 90%, rgba(136, 76, 229, 0.6), transparent);
-            opacity: 0.4;
-            animation: twinkle 3s ease-in-out infinite alternate;
+                radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(1px 1px at 40% 70%, rgba(136, 76, 229, 0.3), transparent),
+                radial-gradient(2px 2px at 90% 40%, rgba(255, 82, 203, 0.4), transparent),
+                radial-gradient(1px 1px at 60% 10%, rgba(163, 228, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 10% 80%, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1px 1px at 80% 90%, rgba(136, 76, 229, 0.3), transparent);
+            opacity: 0.6;
+            animation: gentle-twinkle-move 8s ease-in-out infinite alternate;
             pointer-events: none;
             z-index: 1;
         }
 
+        /* SUBTLE MOVING PARTICLE ANIMATION - LAYER 2 */
         .testimonial-card::after {
             content: '';
             position: absolute;
@@ -890,41 +894,49 @@
             width: 100%;
             height: 100%;
             background:
-                radial-gradient(1px 1px at 15% 60%, rgba(255, 255, 255, 1), transparent),
-                radial-gradient(2px 2px at 70% 20%, rgba(255, 82, 203, 0.9), transparent),
-                radial-gradient(1px 1px at 85% 75%, rgba(163, 228, 255, 1), transparent),
-                radial-gradient(1px 1px at 25% 85%, rgba(136, 76, 229, 0.8), transparent);
-            opacity: 0.3;
-            animation: twinkle-slow 4.5s ease-in-out infinite alternate;
+                radial-gradient(1px 1px at 15% 60%, rgba(255, 255, 255, 0.5), transparent),
+                radial-gradient(2px 2px at 70% 20%, rgba(255, 82, 203, 0.4), transparent),
+                radial-gradient(1px 1px at 85% 75%, rgba(163, 228, 255, 0.5), transparent),
+                radial-gradient(1px 1px at 25% 85%, rgba(136, 76, 229, 0.3), transparent),
+                radial-gradient(2px 2px at 45% 45%, rgba(255, 255, 255, 0.3), transparent);
+            opacity: 0.4;
+            animation: gentle-twinkle-move-slow 12s ease-in-out infinite alternate-reverse;
             pointer-events: none;
             z-index: 1;
         }
 
-        @keyframes twinkle {
+        /* SLOW GENTLE MOVEMENT ANIMATIONS */
+        @keyframes gentle-twinkle-move {
             0% {
-                opacity: 0.2;
+                opacity: 0.4;
+                transform: scale(0.95) translateY(1px);
             }
 
             50% {
-                opacity: 0.6;
+                opacity: 0.7;
+                transform: scale(1.05) translateY(-0.5px);
             }
 
             100% {
-                opacity: 0.4;
+                opacity: 0.6;
+                transform: scale(1) translateY(0.5px);
             }
         }
 
-        @keyframes twinkle-slow {
+        @keyframes gentle-twinkle-move-slow {
             0% {
-                opacity: 0.1;
+                opacity: 0.2;
+                transform: scale(0.98) rotate(0deg) translateX(-0.5px);
             }
 
             50% {
                 opacity: 0.5;
+                transform: scale(1.02) rotate(90deg) translateX(1px);
             }
 
             100% {
-                opacity: 0.3;
+                opacity: 0.4;
+                transform: scale(1) rotate(180deg) translateX(-0.5px);
             }
         }
 
@@ -934,37 +946,84 @@
         }
 
         .testimonial-card:hover::before {
-            animation-duration: 1.5s;
+            animation-duration: 6s;
         }
 
         .testimonial-card:hover::after {
-            animation-duration: 2s;
+            animation-duration: 9s;
         }
 
+        /* STAR RATING - COMPACT & CLEAN */
+        .testimonial-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .testimonial-star {
+            color: #FFD700;
+            font-size: 0.9rem;
+            animation: star-glow 3s ease-in-out infinite;
+            animation-delay: calc(var(--star-index) * 0.3s);
+        }
+
+        @keyframes star-glow {
+
+            0%,
+            100% {
+                opacity: 0.9;
+            }
+
+            50% {
+                opacity: 1;
+                text-shadow: 0 0 8px #FFD700;
+            }
+        }
+
+        /* SUBTLE QUOTE ICON */
+        .testimonial-quote-icon {
+            font-size: 1.5rem;
+            color: var(--primary-purple);
+            opacity: 0.6;
+        }
+
+        /* QUOTE TEXT - CLEAN (NO UGLY QUOTES) */
         .testimonial-quote {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.6;
             margin-bottom: 2rem;
             font-style: italic;
             color: white;
             position: relative;
             z-index: 2;
+            flex-grow: 1;
         }
 
+        /* AUTHOR SECTION */
         .testimonial-author {
             display: flex;
             align-items: center;
             gap: 1rem;
             position: relative;
             z-index: 2;
+            margin-top: auto;
         }
 
         .testimonial-avatar {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid var(--primary-purple);
+            flex-shrink: 0;
         }
 
         .testimonial-avatar img {
@@ -977,10 +1036,12 @@
             font-weight: 700;
             color: white;
             margin-bottom: 0.25rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
         }
 
         .testimonial-info p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.7);
         }
 
@@ -1167,6 +1228,222 @@
             padding: 0 2rem 2rem;
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.6;
+        }
+
+        /* CONTACT SECTION STYLES */
+        .contact-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+            color: var(--text-main);
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(136, 76, 229, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 82, 203, 0.04) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        /* CONTACT FORM STYLES */
+        .contact-form-wrapper {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(136, 76, 229, 0.1);
+            box-shadow: 0 20px 40px rgba(136, 76, 229, 0.08);
+        }
+
+        .contact-form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-form-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .contact-form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+
+        .contact-form-input,
+        .contact-form-textarea,
+        .contact-form-select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .contact-form-input:focus,
+        .contact-form-textarea:focus,
+        .contact-form-select:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(136, 76, 229, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .contact-form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form-submit {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+            color: white;
+            border: none;
+            padding: 1.25rem 3rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+            box-shadow: 0 8px 25px rgba(136, 76, 229, 0.25);
+        }
+
+        .contact-form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(136, 76, 229, 0.4);
+        }
+
+        /* CONTACT INFO STYLES */
+        .contact-info-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(136, 76, 229, 0.1);
+            box-shadow: 0 10px 30px rgba(136, 76, 229, 0.05);
+        }
+
+        .contact-info-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(136, 76, 229, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-item:hover {
+            background: rgba(136, 76, 229, 0.1);
+            transform: translateX(4px);
+        }
+
+        .contact-info-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info-details h4 {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-info-details p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .contact-info-details a {
+            color: var(--primary-purple);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info-details a:hover {
+            color: var(--accent-pink);
+        }
+
+        /* MAP CONTAINER */
+        .contact-map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 300px;
+            border: 1px solid rgba(136, 76, 229, 0.1);
+            box-shadow: 0 10px 30px rgba(136, 76, 229, 0.05);
+        }
+
+        .contact-map-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(20%) contrast(1.1);
         }
 
         /* FOOTER */
@@ -1421,7 +1698,73 @@
             transform: translateY(0);
         }
 
-        /* RESPONSIVE */
+        /* HAMBURGER MENU */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: white;
+            border-radius: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary-purple);
+        }
+
+        /* MOBILE RESPONSIVE DESIGN */
         @media (max-width: 1024px) {
             .navbar-menu {
                 gap: 1.5rem;
@@ -1437,6 +1780,7 @@
 
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
+                gap: 2rem;
             }
 
             .hero-content {
@@ -1500,11 +1844,146 @@
                 border-right-color: rgba(255, 255, 255, 0.95);
                 border-left-color: transparent;
             }
+
+            .contact-grid {
+                gap: 3rem;
+            }
+
+            .contact-form-wrapper,
+            .contact-info-card {
+                padding: 2rem;
+            }
         }
 
         @media (max-width: 768px) {
+
+            /* Hide custom cursor on mobile */
+            .cursor,
+            .cursor-dot {
+                display: none;
+            }
+
+            /* Navigation mobile */
+            .navbar {
+                padding: 1rem;
+            }
+
+            .navbar.scrolled {
+                padding: 0.75rem 1rem;
+            }
+
+            .navbar.scrolled .navbar-container {
+                padding: 0.5rem 1.5rem;
+            }
+
             .navbar-menu {
                 display: none;
+            }
+
+            .navbar-cta {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .navbar-logo {
+                font-size: 1.5rem;
+            }
+
+            .navbar-logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            /* Hero mobile */
+            .hero {
+                padding-top: 80px;
+                min-height: 100vh;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+                gap: 2rem;
+            }
+
+            .hero-video-container {
+                height: 280px;
+            }
+
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.6rem 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: clamp(1.8rem, 8vw, 2.5rem);
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-cta-container {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            .hero-stat-number {
+                font-size: 1.2rem;
+            }
+
+            .hero-stat-label {
+                font-size: 0.7rem;
+            }
+
+            /* Sections mobile */
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+
+            .section-badge {
+                font-size: 0.75rem;
+                padding: 0.6rem 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-title {
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+                margin-bottom: 1rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            /* Cards mobile */
+            .card-grid {
+                gap: 1.5rem;
+                margin-top: 2rem;
             }
 
             .grid-3,
@@ -1512,18 +1991,35 @@
                 grid-template-columns: 1fr;
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr;
+            .modern-card {
+                margin-bottom: 0;
             }
 
-            .hero-content {
-                padding: 0 1rem;
+            .card-image {
+                height: 180px;
             }
 
-            .hero-video-container {
-                height: 300px;
+            .card-content {
+                padding: 1.5rem;
             }
 
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+
+            .card-description {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            /* Shop grid mobile */
             .shop-grid {
                 grid-template-columns: 1fr;
                 grid-template-rows: auto;
@@ -1535,19 +2031,42 @@
             .shop-card.small {
                 grid-column: span 1;
                 grid-row: span 1;
-                min-height: 220px;
+                min-height: 200px;
             }
 
             .shop-card-image {
-                height: 110px;
+                height: 120px;
             }
 
+            .shop-card-content {
+                padding: 1.2rem;
+            }
+
+            .shop-card-title {
+                font-size: 1.1rem;
+            }
+
+            .shop-card-description {
+                font-size: 0.85rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .shop-card-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            /* Process timeline mobile */
             .process-timeline::before {
                 left: 30px;
             }
 
             .process-timeline-number {
                 left: 30px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
 
             .process-step-timeline:nth-child(odd) .process-step-content,
@@ -1573,90 +2092,247 @@
                 border-left-color: transparent;
             }
 
-            .footer-bottom {
-                flex-direction: column;
+            .process-step-content {
+                padding: 1.5rem;
+            }
+
+            .process-timeline-image {
+                height: 120px;
+                margin-bottom: 1rem;
+            }
+
+            .process-timeline-title {
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .process-timeline-description {
+                font-size: 0.9rem;
+            }
+
+            /* Testimonials mobile */
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .testimonial-star {
+                font-size: 0.8rem;
+            }
+
+            .testimonial-quote {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .testimonial-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .testimonial-info h4 {
+                font-size: 0.9rem;
+            }
+
+            .testimonial-info p {
+                font-size: 0.8rem;
+            }
+
+            /* FAQ mobile */
+            .faq-question {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+
+            .faq-answer-content {
+                padding: 0 1.5rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            /* Contact mobile */
+            .contact-section {
+                padding: 4rem 0;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-wrapper,
+            .contact-info-card {
+                padding: 1.5rem;
+            }
+
+            .contact-form-title {
+                font-size: 1.75rem;
+            }
+
+            .contact-info-title {
+                font-size: 1.25rem;
+            }
+
+            .contact-form-input,
+            .contact-form-textarea,
+            .contact-form-select {
+                padding: 0.875rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .contact-form-submit {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .contact-info-item {
+                padding: 0.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .contact-info-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .contact-map-container {
+                height: 250px;
+            }
+
+            /* Footer mobile */
+            .footer {
+                padding: 3rem 0 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
                 text-align: center;
             }
 
-            .section {
-                padding: 4rem 0;
+            .footer-brand {
+                max-width: none;
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .footer-logo {
+                justify-content: center;
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-description {
+                margin-bottom: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .footer-social {
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .footer-social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+
+            .footer-heading {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-links li {
+                margin-bottom: 0.6rem;
+            }
+
+            .footer-links a {
+                font-size: 0.9rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .footer-copyright {
+                font-size: 0.8rem;
+            }
+
+            .footer-legal {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .footer-legal a {
+                font-size: 0.8rem;
+            }
+
+            /* Modal mobile */
+            .modal {
+                padding: 0.5rem;
+            }
+
+            .modal-content {
+                padding: 2rem;
+                margin: 0.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
             }
 
             .form-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* HAMBURGER MENU */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-            padding: 8px;
-        }
+            .form-control {
+                padding: 0.875rem;
+                font-size: 0.95rem;
+            }
 
-        .hamburger span {
-            width: 24px;
-            height: 2px;
-            background: white;
-            border-radius: 1px;
-            transition: all 0.3s ease;
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
+            /* Mobile menu improvements */
+            .mobile-menu a {
+                font-size: 1.5rem;
+                padding: 0.5rem;
             }
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .hero-video-container {
+                height: 240px;
+            }
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
+            .hero-title {
+                font-size: clamp(1.5rem, 8vw, 2rem);
+            }
 
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
+            .section-title {
+                font-size: clamp(1.5rem, 7vw, 2rem);
+            }
 
-        /* MOBILE MENU */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3rem;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
+            .card-image {
+                height: 160px;
+            }
 
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
-        }
+            .shop-card-image {
+                height: 100px;
+            }
 
-        .mobile-menu a {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+            .contact-map-container {
+                height: 200px;
+            }
 
-        .mobile-menu a:hover {
-            color: var(--primary-purple);
+            .process-timeline-image {
+                height: 100px;
+            }
         }
     </style>
 </head>
@@ -1725,7 +2401,8 @@
                 </h1>
 
                 <p class="hero-subtitle">
-                    Siamo qui per ascoltarla con attenzione, valorizzarla con competenza e accompagnarti con empatia e le migliori
+                    Siamo qui per ascoltarla con attenzione, valorizzarla con competenza e accompagnarti con empatia e
+                    le migliori
                     tecnologie in ogni fase del percorso.
                 </p>
 
@@ -1745,8 +2422,8 @@
                     id="hero-video-inner">
                     <source src="hero.mp4" type="video/mp4">
                 </video>
-                <img src="pic1.png"
-                    alt="La tua casa racconta la tua storia" class="hero-video-inner" id="hero-fallback-inner">
+                <img src="pic1.png" alt="La tua casa racconta la tua storia" class="hero-video-inner"
+                    id="hero-fallback-inner">
 
                 <div class="hero-video-overlay">
                     <div class="hero-stats">
@@ -1785,8 +2462,7 @@
 
             <div class="card-grid grid-2 fade-up">
                 <div class="modern-card" onclick="openModal('online')">
-                    <img src="pic2.png"
-                        alt="Valutazione Online" class="card-image">
+                    <img src="pic2.png" alt="Valutazione Online" class="card-image">
                     <div class="card-content">
                         <div class="card-icon">
                             <i class="fas fa-laptop"></i>
@@ -1804,8 +2480,7 @@
                 </div>
 
                 <div class="modern-card" onclick="openModal('presenza')">
-                    <img src="pic3.png"
-                        alt="Valutazione in Presenza" class="card-image">
+                    <img src="pic3.png" alt="Valutazione in Presenza" class="card-image">
                     <div class="card-content">
                         <div class="card-icon">
                             <i class="fas fa-user-tie"></i>
@@ -1842,8 +2517,7 @@
 
             <div class="shop-grid fade-up">
                 <div class="shop-card large">
-                    <img src="pic4.png"
-                        alt="Valutazione Gratuita" class="shop-card-image">
+                    <img src="pic4.png" alt="Valutazione Gratuita" class="shop-card-image">
                     <div class="shop-card-content">
                         <div class="shop-card-header">
                             <div class="shop-card-icon">
@@ -1862,8 +2536,7 @@
                 </div>
 
                 <div class="shop-card medium">
-                    <img src="pic5.png"
-                        alt="Verifica Documentale" class="shop-card-image">
+                    <img src="pic5.png" alt="Verifica Documentale" class="shop-card-image">
                     <div class="shop-card-content">
                         <div class="shop-card-header">
                             <div class="shop-card-icon">
@@ -1881,8 +2554,7 @@
                 </div>
 
                 <div class="shop-card small">
-                    <img src="pic6.png"
-                        alt="Home Staging" class="shop-card-image">
+                    <img src="pic6.png" alt="Home Staging" class="shop-card-image">
                     <div class="shop-card-content">
                         <div class="shop-card-header">
                             <div class="shop-card-icon">
@@ -1900,8 +2572,7 @@
                 </div>
 
                 <div class="shop-card small">
-                    <img src="pic7.png"
-                        alt="Consulenza Finanziaria" class="shop-card-image">
+                    <img src="pic7.png" alt="Consulenza Finanziaria" class="shop-card-image">
                     <div class="shop-card-content">
                         <div class="shop-card-header">
                             <div class="shop-card-icon">
@@ -1938,8 +2609,7 @@
 
             <div class="card-grid grid-3 fade-up">
                 <div class="modern-card">
-                    <img src="pic8.png"
-                        alt="Marco Benedetti" class="card-image">
+                    <img src="pic8.png" alt="Marco Benedetti" class="card-image">
                     <div class="card-content">
                         <div class="card-icon">
                             <i class="fas fa-crown"></i>
@@ -1952,14 +2622,13 @@
                             specializzandosi in immobili di prestigio e consulenza strategica.
                         </p>
                         <a href="#" class="card-link">
-                            LinkedIn &nbsp;  <i class="fab fa-linkedin"></i>
+                            LinkedIn &nbsp; <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="modern-card">
-                    <img src="pic9.png"
-                        alt="Giulia Romano" class="card-image">
+                    <img src="pic9.png" alt="Giulia Romano" class="card-image">
                     <div class="card-content">
                         <div class="card-icon">
                             <i class="fas fa-camera"></i>
@@ -1978,8 +2647,7 @@
                 </div>
 
                 <div class="modern-card">
-                    <img src="pic10.png"
-                        alt="Alessandro Ferri" class="card-image">
+                    <img src="pic10.png" alt="Alessandro Ferri" class="card-image">
                     <div class="card-content">
                         <div class="card-icon">
                             <i class="fas fa-handshake"></i>
@@ -2019,8 +2687,7 @@
                 <div class="process-step-timeline" data-step="1">
                     <div class="process-timeline-number">1</div>
                     <div class="process-step-content">
-                        <img src="pic11.png"
-                            alt="Valutazione" class="process-timeline-image">
+                        <img src="pic11.png" alt="Valutazione" class="process-timeline-image">
                         <h4 class="process-timeline-title">Valutazione</h4>
                         <p class="process-timeline-description">Analizziamo il tuo immobile e il mercato di riferimento
                             per determinare il prezzo ottimale di vendita</p>
@@ -2030,8 +2697,7 @@
                 <div class="process-step-timeline" data-step="2">
                     <div class="process-timeline-number">2</div>
                     <div class="process-step-content">
-                        <img src="pic12.png"
-                            alt="Strategia" class="process-timeline-image">
+                        <img src="pic12.png" alt="Strategia" class="process-timeline-image">
                         <h4 class="process-timeline-title">Strategia</h4>
                         <p class="process-timeline-description">Prepariamo un piano di marketing personalizzato e una
                             strategia di vendita su misura per il tuo immobile</p>
@@ -2041,8 +2707,7 @@
                 <div class="process-step-timeline" data-step="3">
                     <div class="process-timeline-number">3</div>
                     <div class="process-step-content">
-                        <img src="pic13.png"
-                            alt="Shooting" class="process-timeline-image">
+                        <img src="pic13.png" alt="Shooting" class="process-timeline-image">
                         <h4 class="process-timeline-title">Shooting</h4>
                         <p class="process-timeline-description">Realizziamo foto e video professionali per valorizzare
                             al meglio ogni angolo del tuo immobile</p>
@@ -2052,8 +2717,7 @@
                 <div class="process-step-timeline" data-step="4">
                     <div class="process-timeline-number">4</div>
                     <div class="process-step-content">
-                        <img src="pic14.png"
-                            alt="Visite" class="process-timeline-image">
+                        <img src="pic14.png" alt="Visite" class="process-timeline-image">
                         <h4 class="process-timeline-title">Visite</h4>
                         <p class="process-timeline-description">Organizziamo visite qualificate con potenziali
                             acquirenti accuratamente selezionati</p>
@@ -2063,8 +2727,7 @@
                 <div class="process-step-timeline" data-step="5">
                     <div class="process-timeline-number">5</div>
                     <div class="process-step-content">
-                        <img src="pic15.png"
-                            alt="Trattativa" class="process-timeline-image">
+                        <img src="pic15.png" alt="Trattativa" class="process-timeline-image">
                         <h4 class="process-timeline-title">Trattativa</h4>
                         <p class="process-timeline-description">Conduciamo la negoziazione con esperienza per ottenere
                             le migliori condizioni possibili</p>
@@ -2074,8 +2737,7 @@
                 <div class="process-step-timeline" data-step="6">
                     <div class="process-timeline-number">6</div>
                     <div class="process-step-content">
-                        <img src="pic16.png"
-                            alt="Rogito" class="process-timeline-image">
+                        <img src="pic16.png" alt="Rogito" class="process-timeline-image">
                         <h4 class="process-timeline-title">Rogito</h4>
                         <p class="process-timeline-description">Ti assistiamo fino alla firma finale garantendo una
                             conclusione serena e senza imprevisti</p>
@@ -2085,220 +2747,6 @@
         </div>
     </section>
 
-    <!-- CLEAN TESTIMONIALS WITH PROPER STAR LAYOUT -->
-    <style>
-        /* TESTIMONIALS - CLEAN LAYOUT */
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 2.5rem;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-    
-        /* SUBTLE MOVING PARTICLE ANIMATION - LAYER 1 */
-        .testimonial-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.4), transparent),
-                radial-gradient(1px 1px at 40% 70%, rgba(136, 76, 229, 0.3), transparent),
-                radial-gradient(2px 2px at 90% 40%, rgba(255, 82, 203, 0.4), transparent),
-                radial-gradient(1px 1px at 60% 10%, rgba(163, 228, 255, 0.3), transparent),
-                radial-gradient(2px 2px at 10% 80%, rgba(255, 255, 255, 0.2), transparent),
-                radial-gradient(1px 1px at 80% 90%, rgba(136, 76, 229, 0.3), transparent);
-            opacity: 0.6;
-            animation: gentle-twinkle-move 8s ease-in-out infinite alternate;
-            pointer-events: none;
-            z-index: 1;
-        }
-    
-        /* SUBTLE MOVING PARTICLE ANIMATION - LAYER 2 */
-        .testimonial-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(1px 1px at 15% 60%, rgba(255, 255, 255, 0.5), transparent),
-                radial-gradient(2px 2px at 70% 20%, rgba(255, 82, 203, 0.4), transparent),
-                radial-gradient(1px 1px at 85% 75%, rgba(163, 228, 255, 0.5), transparent),
-                radial-gradient(1px 1px at 25% 85%, rgba(136, 76, 229, 0.3), transparent),
-                radial-gradient(2px 2px at 45% 45%, rgba(255, 255, 255, 0.3), transparent);
-            opacity: 0.4;
-            animation: gentle-twinkle-move-slow 12s ease-in-out infinite alternate-reverse;
-            pointer-events: none;
-            z-index: 1;
-        }
-    
-        /* SLOW GENTLE MOVEMENT ANIMATIONS */
-        @keyframes gentle-twinkle-move {
-            0% {
-                opacity: 0.4;
-                transform: scale(0.95) translateY(1px);
-            }
-    
-            50% {
-                opacity: 0.7;
-                transform: scale(1.05) translateY(-0.5px);
-            }
-    
-            100% {
-                opacity: 0.6;
-                transform: scale(1) translateY(0.5px);
-            }
-        }
-    
-        @keyframes gentle-twinkle-move-slow {
-            0% {
-                opacity: 0.2;
-                transform: scale(0.98) rotate(0deg) translateX(-0.5px);
-            }
-    
-            50% {
-                opacity: 0.5;
-                transform: scale(1.02) rotate(90deg) translateX(1px);
-            }
-    
-            100% {
-                opacity: 0.4;
-                transform: scale(1) rotate(180deg) translateX(-0.5px);
-            }
-        }
-    
-        .testimonial-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-        }
-    
-        .testimonial-card:hover::before {
-            animation-duration: 6s;
-        }
-    
-        .testimonial-card:hover::after {
-            animation-duration: 9s;
-        }
-    
-        /* STAR RATING - COMPACT & CLEAN */
-        .testimonial-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 3;
-        }
-    
-        .testimonial-stars {
-            display: flex;
-            gap: 0.2rem;
-        }
-    
-        .testimonial-star {
-            color: #FFD700;
-            font-size: 0.9rem;
-            animation: star-glow 3s ease-in-out infinite;
-            animation-delay: calc(var(--star-index) * 0.3s);
-        }
-    
-        @keyframes star-glow {
-    
-            0%,
-            100% {
-                opacity: 0.9;
-            }
-    
-            50% {
-                opacity: 1;
-                text-shadow: 0 0 8px #FFD700;
-            }
-        }
-    
-        /* SUBTLE QUOTE ICON */
-        .testimonial-quote-icon {
-            font-size: 1.5rem;
-            color: var(--primary-purple);
-            opacity: 0.6;
-        }
-    
-        /* QUOTE TEXT - CLEAN (NO UGLY QUOTES) */
-        .testimonial-quote {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            font-style: italic;
-            color: white;
-            position: relative;
-            z-index: 2;
-            flex-grow: 1;
-        }
-    
-        /* AUTHOR SECTION */
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            position: relative;
-            z-index: 2;
-            margin-top: auto;
-        }
-    
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--primary-purple);
-            flex-shrink: 0;
-        }
-    
-        .testimonial-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    
-        .testimonial-info h4 {
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.25rem;
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-        }
-    
-        .testimonial-info p {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-    
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .testimonial-card {
-                padding: 2rem;
-            }
-    
-            .testimonial-star {
-                font-size: 0.8rem;
-            }
-    
-            .testimonial-quote {
-                font-size: 1rem;
-            }
-        }
-    </style>
-    
     <!-- CLEAN TESTIMONIALS SECTION HTML -->
     <section id="recensioni" class="section section-dark">
         <div class="section-container">
@@ -2313,7 +2761,7 @@
                     che abbiamo condiviso insieme.
                 </p>
             </div>
-    
+
             <div class="card-grid grid-3 fade-up">
                 <div class="testimonial-card">
                     <div class="testimonial-header">
@@ -2328,12 +2776,12 @@
                             <i class="fas fa-quote-right"></i>
                         </div>
                     </div>
-    
+
                     <div class="testimonial-quote">
                         Professionalità, disponibilità e tanta pazienza. Hanno venduto la nostra casa in tempi record e
                         al prezzo che speravamo. Non potremmo essere più felici!
                     </div>
-    
+
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
                             <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face"
@@ -2345,7 +2793,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-stars">
@@ -2359,12 +2807,12 @@
                             <i class="fas fa-quote-right"></i>
                         </div>
                     </div>
-    
+
                     <div class="testimonial-quote">
                         Mi hanno seguito passo dopo passo con un'empatia rara. La valutazione è stata sorprendentemente
                         accurata e il processo di vendita gestito in modo impeccabile.
                     </div>
-    
+
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
                             <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=face"
@@ -2376,7 +2824,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-stars">
@@ -2390,12 +2838,12 @@
                             <i class="fas fa-quote-right"></i>
                         </div>
                     </div>
-    
+
                     <div class="testimonial-quote">
                         Un team che va oltre la semplice vendita. Il servizio di home staging ha trasformato la nostra
                         casa e ha fatto la differenza durante le visite. Consigliatissimi!
                     </div>
-    
+
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">
                             <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=100&h=100&fit=crop&crop=face"
@@ -2487,261 +2935,6 @@
         </div>
     </section>
 
-    <!-- CONTACT FORM SECTION -->
-    <style>
-        /* CONTACT SECTION STYLES */
-        .contact-section {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
-            color: var(--text-main);
-            padding: 6rem 0;
-            position: relative;
-        }
-    
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(circle at 20% 20%, rgba(136, 76, 229, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 82, 203, 0.04) 0%, transparent 50%);
-            z-index: 0;
-        }
-    
-        .contact-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-    
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-            margin-top: 3rem;
-        }
-    
-        /* CONTACT FORM STYLES */
-        .contact-form-wrapper {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 3rem;
-            border: 1px solid rgba(136, 76, 229, 0.1);
-            box-shadow: 0 20px 40px rgba(136, 76, 229, 0.08);
-        }
-    
-        .contact-form-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-            font-family: 'Playfair Display', serif;
-        }
-    
-        .contact-form-subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-    
-        .contact-form-group {
-            margin-bottom: 1.5rem;
-        }
-    
-        .contact-form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-    
-        .contact-form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-main);
-            font-size: 0.9rem;
-        }
-    
-        .contact-form-input,
-        .contact-form-textarea,
-        .contact-form-select {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            border: 2px solid var(--border-light);
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
-            font-family: 'Inter', sans-serif;
-        }
-    
-        .contact-form-input:focus,
-        .contact-form-textarea:focus,
-        .contact-form-select:focus {
-            outline: none;
-            border-color: var(--primary-purple);
-            box-shadow: 0 0 0 3px rgba(136, 76, 229, 0.1);
-            transform: translateY(-1px);
-        }
-    
-        .contact-form-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-    
-        .contact-form-submit {
-            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
-            color: white;
-            border: none;
-            padding: 1.25rem 3rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 1rem;
-            box-shadow: 0 8px 25px rgba(136, 76, 229, 0.25);
-        }
-    
-        .contact-form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(136, 76, 229, 0.4);
-        }
-    
-        /* CONTACT INFO STYLES */
-        .contact-info-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-    
-        .contact-info-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 2rem;
-            border: 1px solid rgba(136, 76, 229, 0.1);
-            box-shadow: 0 10px 30px rgba(136, 76, 229, 0.05);
-        }
-    
-        .contact-info-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--text-main);
-            font-family: 'Playfair Display', serif;
-        }
-    
-        .contact-info-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: rgba(136, 76, 229, 0.05);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-    
-        .contact-info-item:hover {
-            background: rgba(136, 76, 229, 0.1);
-            transform: translateX(4px);
-        }
-    
-        .contact-info-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-    
-        .contact-info-details h4 {
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 0.25rem;
-        }
-    
-        .contact-info-details p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-    
-        .contact-info-details a {
-            color: var(--primary-purple);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-    
-        .contact-info-details a:hover {
-            color: var(--accent-pink);
-        }
-    
-        /* MAP CONTAINER */
-        .contact-map-container {
-            border-radius: 20px;
-            overflow: hidden;
-            height: 300px;
-            border: 1px solid rgba(136, 76, 229, 0.1);
-            box-shadow: 0 10px 30px rgba(136, 76, 229, 0.05);
-        }
-    
-        .contact-map-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            filter: grayscale(20%) contrast(1.1);
-        }
-    
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .contact-grid {
-                gap: 3rem;
-            }
-    
-            .contact-form-wrapper,
-            .contact-info-card {
-                padding: 2rem;
-            }
-        }
-    
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-    
-            .contact-form-row {
-                grid-template-columns: 1fr;
-            }
-    
-            .contact-form-wrapper,
-            .contact-info-card {
-                padding: 1.5rem;
-            }
-    
-            .contact-form-title {
-                font-size: 1.75rem;
-            }
-    
-            .contact-info-title {
-                font-size: 1.25rem;
-            }
-        }
-    </style>
-    
     <!-- CONTACT SECTION HTML -->
     <section id="contatti" class="contact-section">
         <div class="contact-container">
@@ -2757,7 +2950,7 @@
                     Oppure chiamaci direttamente per una consulenza immediata.
                 </p>
             </div>
-    
+
             <div class="contact-grid fade-up">
                 <!-- CONTACT FORM - LEFT SIDE -->
                 <div class="contact-form-wrapper">
@@ -2765,7 +2958,7 @@
                     <p class="contact-form-subtitle">
                         Raccontaci di cosa hai bisogno e ti risponderemo con la soluzione perfetta per te.
                     </p>
-    
+
                     <form class="contact-form" id="contact-form">
                         <div class="contact-form-row">
                             <div class="contact-form-group">
@@ -2774,10 +2967,11 @@
                             </div>
                             <div class="contact-form-group">
                                 <label class="contact-form-label">Cognome *</label>
-                                <input type="text" class="contact-form-input" name="cognome" required placeholder="Rossi">
+                                <input type="text" class="contact-form-input" name="cognome" required
+                                    placeholder="Rossi">
                             </div>
                         </div>
-    
+
                         <div class="contact-form-row">
                             <div class="contact-form-group">
                                 <label class="contact-form-label">Email *</label>
@@ -2790,7 +2984,7 @@
                                     placeholder="+39 123 456 7890">
                             </div>
                         </div>
-    
+
                         <div class="contact-form-group">
                             <label class="contact-form-label">Tipo di Richiesta</label>
                             <select class="contact-form-select" name="tipo_richiesta">
@@ -2801,30 +2995,31 @@
                                 <option value="altro">Altro</option>
                             </select>
                         </div>
-    
+
                         <div class="contact-form-group">
                             <label class="contact-form-label">Indirizzo Immobile (opzionale)</label>
-                            <input type="text" class="contact-form-input" name="indirizzo" placeholder="Via, Numero, Città">
+                            <input type="text" class="contact-form-input" name="indirizzo"
+                                placeholder="Via, Numero, Città">
                         </div>
-    
+
                         <div class="contact-form-group">
                             <label class="contact-form-label">Messaggio *</label>
                             <textarea class="contact-form-textarea" name="messaggio" required
                                 placeholder="Raccontaci di cosa hai bisogno..."></textarea>
                         </div>
-    
+
                         <button type="submit" class="contact-form-submit">
                             <i class="fas fa-paper-plane" style="margin-right: 0.75rem;"></i>
                             Invia Richiesta
                         </button>
                     </form>
                 </div>
-    
+
                 <!-- CONTACT INFO & MAP - RIGHT SIDE -->
                 <div class="contact-info-wrapper">
                     <div class="contact-info-card">
                         <h3 class="contact-info-title">I nostri contatti</h3>
-    
+
                         <div class="contact-info-item">
                             <div class="contact-info-icon">
                                 <i class="fas fa-phone"></i>
@@ -2834,7 +3029,7 @@
                                 <p><a href="tel:+390123456789">+39 012 345 6789</a></p>
                             </div>
                         </div>
-    
+
                         <div class="contact-info-item">
                             <div class="contact-info-icon">
                                 <i class="fas fa-envelope"></i>
@@ -2844,7 +3039,7 @@
                                 <p><a href="mailto:info@eliteimmobiliare.it">info@eliteimmobiliare.it</a></p>
                             </div>
                         </div>
-    
+
                         <div class="contact-info-item">
                             <div class="contact-info-icon">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -2854,7 +3049,7 @@
                                 <p>Via Roma, 123<br>00186 Roma, Italia</p>
                             </div>
                         </div>
-    
+
                         <div class="contact-info-item">
                             <div class="contact-info-icon">
                                 <i class="fas fa-clock"></i>
@@ -2865,7 +3060,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <!-- GOOGLE MAP -->
                     <div class="contact-map-container">
                         <iframe class="contact-map-iframe"
@@ -2877,40 +3072,9 @@
             </div>
         </div>
     </section>
-    
-    <!-- CONTACT FORM JAVASCRIPT -->
-    <script>
-        // Contact form handling
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const submitBtn = this.querySelector('.contact-form-submit');
-                const originalText = submitBtn.innerHTML;
-
-                // Show loading state
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 0.75rem;"></i>Invio in corso...';
-                submitBtn.disabled = true;
-
-                // Simulate form submission (replace with actual submission)
-                setTimeout(() => {
-                    submitBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 0.75rem;"></i>Richiesta Inviata!';
-
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                        contactForm.reset();
-
-                        alert('Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo entro 24 ore.');
-                    }, 2000);
-                }, 2000);
-            });
-        }
-    </script>
 
     <!-- CTA SECTION - GRADIENT -->
-    <section id="contatti" class="section section-gradient">
+    <section class="section section-gradient">
         <div class="section-container">
             <div class="section-header fade-up">
                 <h2 class="section-title" style="color: white;">Pronto a dare valore alla tua storia?</h2>
@@ -3101,29 +3265,31 @@
     </div>
 
     <script>
-    // Enable enhanced animations
+        // Enable enhanced animations
         document.body.classList.add('js-enabled');
 
-        // Enhanced cursor
+        // Enhanced cursor - hide on mobile
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
 
-            setTimeout(() => {
-                cursorDot.style.left = e.clientX + 'px';
-                cursorDot.style.top = e.clientY + 'px';
-            }, 50);
-        });
+                setTimeout(() => {
+                    cursorDot.style.left = e.clientX + 'px';
+                    cursorDot.style.top = e.clientY + 'px';
+                }, 50);
+            });
 
-        // Cursor hover effects
-        const hoverElements = document.querySelectorAll('a, button, .modern-card, .testimonial-card, .faq-question, .shop-card, .process-step-timeline');
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
+            // Cursor hover effects
+            const hoverElements = document.querySelectorAll('a, button, .modern-card, .testimonial-card, .faq-question, .shop-card, .process-step-timeline');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+        }
 
         // Enhanced navbar scroll
         const navbar = document.getElementById('navbar');
@@ -3136,42 +3302,42 @@
         });
 
         // Video fallback for hero - SHOW IMAGE FIRST
-            const video = document.getElementById('hero-video-inner');
-            const fallback = document.getElementById('hero-fallback-inner');
+        const video = document.getElementById('hero-video-inner');
+        const fallback = document.getElementById('hero-fallback-inner');
 
-            // Always show image first
-            if (fallback) {
-                fallback.style.display = 'block';
-            }
+        // Always show image first
+        if (fallback) {
+            fallback.style.display = 'block';
+        }
 
-            // Hide video initially
-            if (video) {
-                video.style.display = 'none';
-            }
+        // Hide video initially
+        if (video) {
+            video.style.display = 'none';
+        }
 
-            // Try to load and play video
-            if (video && video.canPlayType && video.canPlayType('video/mp4') !== '') {
-                // Set up video event listeners
-                video.addEventListener('loadeddata', () => {
-                    // Video is ready to play, switch from image to video
-                    if (fallback) fallback.style.display = 'none';
-                    video.style.display = 'block';
-                    video.play().catch(() => {
-                        // If autoplay fails, keep showing image
-                        if (fallback) fallback.style.display = 'block';
-                        video.style.display = 'none';
-                    });
-                });
-
-                video.addEventListener('error', () => {
-                    // Video failed to load, keep showing image
+        // Try to load and play video
+        if (video && video.canPlayType && video.canPlayType('video/mp4') !== '') {
+            // Set up video event listeners
+            video.addEventListener('loadeddata', () => {
+                // Video is ready to play, switch from image to video
+                if (fallback) fallback.style.display = 'none';
+                video.style.display = 'block';
+                video.play().catch(() => {
+                    // If autoplay fails, keep showing image
                     if (fallback) fallback.style.display = 'block';
                     video.style.display = 'none';
                 });
+            });
 
-                // Start loading the video
-                video.load();
-            }
+            video.addEventListener('error', () => {
+                // Video failed to load, keep showing image
+                if (fallback) fallback.style.display = 'block';
+                video.style.display = 'none';
+            });
+
+            // Start loading the video
+            video.load();
+        }
 
         // Mobile menu
         const hamburger = document.getElementById('hamburger');
@@ -3181,6 +3347,15 @@
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking on links
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
 
         // Smooth scrolling
@@ -3281,35 +3456,65 @@
             });
         });
 
-        // Form handling
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', (e) => {
+        // Contact form handling
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                const submitBtn = form.querySelector('button[type="submit"]');
+                const submitBtn = this.querySelector('.contact-form-submit');
                 const originalText = submitBtn.innerHTML;
 
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>Elaborazione...';
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 0.75rem;"></i>Invio in corso...';
                 submitBtn.disabled = true;
 
+                // Simulate form submission (replace with actual submission)
                 setTimeout(() => {
-                    submitBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 0.5rem;"></i>Richiesta Inviata!';
+                    submitBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 0.75rem;"></i>Richiesta Inviata!';
 
                     setTimeout(() => {
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
-                        form.reset();
+                        contactForm.reset();
 
-                        // Close modal
-                        document.querySelectorAll('.modal.active').forEach(modal => {
-                            modal.classList.remove('active');
-                            document.body.style.overflow = '';
-                        });
-
-                        alert('Grazie! Ti contatteremo entro 24 ore.');
+                        alert('Grazie! Abbiamo ricevuto la tua richiesta. Ti contatteremo entro 24 ore.');
                     }, 2000);
                 }, 2000);
             });
+        }
+
+        // Form handling for modals
+        document.querySelectorAll('form').forEach(form => {
+            if (form.id !== 'contact-form') { // Skip the main contact form
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>Elaborazione...';
+                    submitBtn.disabled = true;
+
+                    setTimeout(() => {
+                        submitBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 0.5rem;"></i>Richiesta Inviata!';
+
+                        setTimeout(() => {
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            form.reset();
+
+                            // Close modal
+                            document.querySelectorAll('.modal.active').forEach(modal => {
+                                modal.classList.remove('active');
+                                document.body.style.overflow = '';
+                            });
+
+                            alert('Grazie! Ti contatteremo entro 24 ore.');
+                        }, 2000);
+                    }, 2000);
+                });
+            }
         });
 
         // Check visible elements on load
@@ -3326,48 +3531,61 @@
         });
 
         // NAVIGATION SECTION HIGHLIGHTING
-            const navLinks = document.querySelectorAll('.navbar-link');
-            const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-link');
+        const sections = document.querySelectorAll('section[id]');
 
-            // Create intersection observer for section highlighting
-            const navObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const sectionId = entry.target.getAttribute('id');
+        // Create intersection observer for section highlighting
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.getAttribute('id');
 
-                        // Remove active class from all nav links
-                        navLinks.forEach(link => link.classList.remove('active'));
+                    // Remove active class from all nav links
+                    navLinks.forEach(link => link.classList.remove('active'));
 
-                        // Add active class to corresponding nav link
-                        const activeLink = document.querySelector(`a[href="#${sectionId}"]`);
-                        if (activeLink && activeLink.classList.contains('navbar-link')) {
-                            activeLink.classList.add('active');
-                        }
+                    // Add active class to corresponding nav link
+                    const activeLink = document.querySelector(`a[href="#${sectionId}"]`);
+                    if (activeLink && activeLink.classList.contains('navbar-link')) {
+                        activeLink.classList.add('active');
+                    }
 
-                        // Special case for hero section (no ID) - activate "Home" link
-                        if (entry.target.classList.contains('hero')) {
-                            const homeLink = document.querySelector('a[href="#"].navbar-link');
-                            if (homeLink) {
-                                homeLink.classList.add('active');
-                            }
+                    // Special case for hero section (no ID) - activate "Home" link
+                    if (entry.target.classList.contains('hero')) {
+                        const homeLink = document.querySelector('a[href="#"].navbar-link');
+                        if (homeLink) {
+                            homeLink.classList.add('active');
                         }
                     }
-                });
-            }, {
-                threshold: 0.3,  // Trigger when 30% of section is visible
-                rootMargin: '-20% 0px -20% 0px'  // Only highlight when section is well in view
+                }
             });
+        }, {
+            threshold: 0.3,  // Trigger when 30% of section is visible
+            rootMargin: '-20% 0px -20% 0px'  // Only highlight when section is well in view
+        });
 
-            // Observe all sections
-            sections.forEach(section => {
-                navObserver.observe(section);
-            });
+        // Observe all sections
+        sections.forEach(section => {
+            navObserver.observe(section);
+        });
 
-            // Also observe hero section if it doesn't have an ID
-            const heroSection = document.querySelector('.hero');
-            if (heroSection) {
-                navObserver.observe(heroSection);
+        // Also observe hero section if it doesn't have an ID
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            navObserver.observe(heroSection);
+        }
+
+        // Handle window resize for mobile optimizations
+        window.addEventListener('resize', () => {
+            // Close mobile menu on resize to larger screen
+            if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
+        });
 
-        console.log('🏠 Elite Immobiliare - La tua casa racconta la tua storia');
+        console.log('🏠 Elite Immobiliare - La tua casa racconta la tua storia (Mobile Ready)');
     </script>
+</body>
+
+</html>
