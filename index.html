@@ -3135,18 +3135,43 @@
             }
         });
 
-        // Video fallback for hero
-        const video = document.getElementById('hero-video-inner');
-        const fallback = document.getElementById('hero-fallback-inner');
+        // Video fallback for hero - SHOW IMAGE FIRST
+            const video = document.getElementById('hero-video-inner');
+            const fallback = document.getElementById('hero-fallback-inner');
 
-        // Try to load video, fallback to image if failed
-        if (video && video.canPlayType('video/mp4') && video.canPlayType('video/mp4') !== '') {
-            video.style.display = 'block';
-            if (fallback) fallback.style.display = 'none';
-        } else {
-            if (video) video.style.display = 'none';
-            if (fallback) fallback.style.display = 'block';
-        }
+            // Always show image first
+            if (fallback) {
+                fallback.style.display = 'block';
+            }
+
+            // Hide video initially
+            if (video) {
+                video.style.display = 'none';
+            }
+
+            // Try to load and play video
+            if (video && video.canPlayType && video.canPlayType('video/mp4') !== '') {
+                // Set up video event listeners
+                video.addEventListener('loadeddata', () => {
+                    // Video is ready to play, switch from image to video
+                    if (fallback) fallback.style.display = 'none';
+                    video.style.display = 'block';
+                    video.play().catch(() => {
+                        // If autoplay fails, keep showing image
+                        if (fallback) fallback.style.display = 'block';
+                        video.style.display = 'none';
+                    });
+                });
+
+                video.addEventListener('error', () => {
+                    // Video failed to load, keep showing image
+                    if (fallback) fallback.style.display = 'block';
+                    video.style.display = 'none';
+                });
+
+                // Start loading the video
+                video.load();
+            }
 
         // Mobile menu
         const hamburger = document.getElementById('hamburger');
