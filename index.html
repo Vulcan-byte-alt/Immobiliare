@@ -757,6 +757,8 @@
             text-align: left;
         }
 
+        
+
         .process-step-timeline:nth-child(odd) .process-step-content {
             margin-right: calc(50% + 2rem);
         }
@@ -1765,7 +1767,7 @@
         }
 
         @media (min-width: 1024px) {
-            .section-subtitle{
+            .section-subtitle {
                 margin-left: 100px;
             }
         }
@@ -2424,10 +2426,7 @@
             </div>
 
             <div class="hero-video-container">
-                <video class="hero-video-inner" autoplay muted loop playsinline style="display: none;"
-                    id="hero-video-inner">
-                    <source src="hero.mp4" type="video/mp4">
-                </video>
+
                 <img src="pic1.png" alt="La tua casa racconta la tua storia" class="hero-video-inner"
                     id="hero-fallback-inner">
 
@@ -2689,7 +2688,7 @@
                 </p>
             </div>
 
-            <div class="process-timeline fade-up" id="process-timeline">
+            <div class="process-timeline" id="process-timeline">
                 <div class="process-step-timeline" data-step="1">
                     <div class="process-timeline-number">1</div>
                     <div class="process-step-content">
@@ -3403,23 +3402,29 @@
             observer.observe(el);
         });
 
-        // Timeline steps INDIVIDUAL animation - one by one as you scroll
+
+    // Timeline steps - Fixed with fade-up animation for first step
+    document.addEventListener('DOMContentLoaded', function () {
         const timelineSteps = document.querySelectorAll('.process-step-timeline');
-        const individualTimelineObserver = new IntersectionObserver((entries) => {
+
+        // Observer for ALL timeline steps including the first one
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    console.log('Step became visible:', entry.target.dataset.step);
                 }
             });
         }, {
-            threshold: 0.3,  // Trigger when 30% of card is visible
-            rootMargin: '0px 0px -100px 0px'  // Trigger slightly before card is fully in view
+            threshold: 0.05,
+            rootMargin: '100px 0px 50px 0px'
         });
 
-        // Observe each timeline step individually
-        timelineSteps.forEach(step => {
-            individualTimelineObserver.observe(step);
+        // Observe all timeline steps (including first one)
+        timelineSteps.forEach((step) => {
+            observer.observe(step);
         });
+    });
 
         // Modal system
         function openModal(modalId) {
